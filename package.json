@@ -1,0 +1,27 @@
+{
+  "name": "frontm",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "./node_modules/.bin/gulp run:dev"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.5",
+    "debug": "~4.1.1",
+    "express": "~4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-nodemon": "^2.5.0",
+    "http-errors": "~1.8.0",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.31",
+    "mongoose": "^5.9.21",
+    "morgan": "~1.10.0",
+    "rest-api-errors": "^1.2.4",
+    "swagger-merger": "^1.4.3",
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^7.0.2",
+    "yamljs": "^0.3.0"
+  }
+}

@@ -1,0 +1,146 @@
+openapi: 3.0.1
+info:
+  title: FrontM Exercise
+  description: API for demonstrating the functionality of exercises in FrontM
+  version: 1
+servers:
+- url: http://localhost:6789/api/v1
+tags:
+- name: Menu
+  description: Search, Sort, Paginate the menu items in the menu
+paths:
+  /menu:
+    get:
+      tags:
+      - Menu
+      summary: List all menus
+      operationId: listMenu
+      parameters:
+      - name: search
+        in: query
+        description: Search with in the results based on first/last name|mobile number
+        schema:
+          type: string
+      - name: skip
+        in: query
+        description: Skip the rows from the results
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: Limit the number of results
+        schema:
+          type: integer
+          format: int64
+          default: 10
+      responses:
+        200:
+          description: Operation result
+    post:
+      tags:
+      - Menu
+      summary: Create a menu item
+      operationId: createMenu
+      requestBody:
+        description: Menu body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItem'
+        required: true
+      responses:
+        200:
+          description: Operation result
+
+  /cart:
+    post:
+      tags:
+      - Cart
+      summary: Create an empty cart
+      operationId: createCart
+      responses:
+        200:
+          description: Operation result
+  /cart/{cartId}:
+    get:
+      tags:
+      - Cart
+      summary: List all items in the cart
+      operationId: listMenu
+      parameters:
+      - name: id
+        in: query
+        description: Cart Id
+        schema:
+          type: string
+      responses:
+        200:
+          description: Operation result
+
+  /cart/add-item/{cartId}:
+    post:
+      tags:
+      - Cart
+      summary: Update cart
+      operationId: updateCart
+      parameters:
+        - name: cartId
+          in: path
+          description: Cart Id
+          schema:
+            type: string  
+      requestBody:
+        description: Menu body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItem'
+        required: true
+      responses:
+        200:
+          description: Operation result
+
+  /cart/place-order/{cartId}:
+    post:
+      tags:
+      - Cart
+      summary: Place order
+      operationId: placeOrder
+      parameters:
+        - name: cartId
+          in: path
+          description: Cart Id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Operation result
+
+
+components:
+  schemas:
+    MenuItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Idly
+        type:
+          type: string
+          example: breakfast
+        cuisine:
+          type: string
+          example: "Sounth Indian"
+        cost:
+          type: int64
+          example: 9.99
+    CartItem:
+      type: object
+      properties:
+        itemId:
+          type: string
+          example: 5f015f676340b59f162e353b
+        quantity:
+          type: int64
+          example: 2
